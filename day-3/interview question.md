@@ -1,391 +1,310 @@
-Here is a comprehensive list of **important AWS EC2 interview questions**, categorized by **level (basic to advanced)** and **with key points you should mention in answers**. These questions are commonly asked in interviews for roles like cloud engineer, DevOps engineer, AWS solution architect, etc.
+### 🟢 Basic EC2 Interview Questions
+
+#### 1. What is Amazon EC2?
+
+**Answer:**
+Amazon EC2 (Elastic Compute Cloud) is a web service provided by AWS that offers scalable and resizable compute capacity in the cloud. It eliminates the need to invest in hardware upfront, so you can develop and deploy applications faster.
+
+**Key Points:**
+
+* Elastic and scalable virtual servers
+* Pay-as-you-go pricing model
+* Supports Windows and Linux
+* Full control over instances (start, stop, reboot, terminate)
 
 ---
 
-## 🔰 **Basic EC2 Interview Questions**
+#### 2. What are the different EC2 instance families, and how do you choose between them?
 
-### 1. **What is Amazon EC2?**
+**Answer:**
+EC2 instance families are categorized based on specific workload characteristics:
 
-* **Ans:** EC2 (Elastic Compute Cloud) is a web service that provides **resizable compute capacity** in the cloud.
-* Key Points: Elastic, scalable, virtual servers, pay-as-you-go model.
+* **General Purpose (T4g, T3, T3a, M6g, M5):** Balanced compute, memory, and networking. Ideal for web servers, app servers, dev/test environments.
+* **Compute Optimized (C7g, C6g, C5):** High performance for compute-intensive tasks such as scientific modeling, batch processing, and gaming.
+* **Memory Optimized (R6g, R5, X2idn):** Designed for memory-intensive workloads like in-memory databases, caching, and real-time big data analytics.
+* **Storage Optimized (I4i, D3, H1):** High, sequential read/write access to large datasets. Great for data warehouses and Hadoop clusters.
+* **Accelerated Computing (P4, G5, Inf2):** Use hardware accelerators (GPU/FPGA) for ML inference/training, high-performance computing.
 
----
-
-1. What are the different EC2 instance families, and how do you choose between them?
-Answer:
-AWS EC2 instance families are categorized based on the type of workload:
-
-General Purpose (T4g, T3, M6g, M5): Balanced CPU, memory, and network. Good for web servers, small databases.
-
-Compute Optimized (C7g, C6g, C5): High CPU-to-memory ratio. Ideal for CPU-bound workloads like batch processing or gaming servers.
-
-Memory Optimized (R6g, R5, X2idn): High memory-to-CPU ratio. Best for in-memory databases like Redis or SAP HANA.
-
-Storage Optimized (I4i, D3, H1): Designed for high disk I/O. Useful for big data and NoSQL.
-
-Accelerated Computing (P4, G5, Inf2): Use GPUs or custom chips for ML/AI, inference, rendering.
-
-Follow-up Tip: Always evaluate performance requirements, cost efficiency, and instance architecture (Intel/Graviton) when choosing.
-
-### 3. **What is the difference between an EBS volume and an instance store?**
-
-* **Ans:**
-
-  * **EBS (Elastic Block Store):** Persistent storage, survives stop/start.
-  * **Instance Store:** Temporary storage, data lost on stop/terminate.
+**Choosing:** Based on workload type, architecture (x86 vs ARM), and cost-performance balance.
 
 ---
 
-### 4. **What are the types of EBS volumes?**
+#### 3. What is the difference between an EBS volume and an Instance Store?
 
-* **Ans:**
+**Answer:**
 
-  * gp3, gp2 – General purpose SSD
-  * io2/io1 – Provisioned IOPS SSD
-  * st1 – Throughput optimized HDD
-  * sc1 – Cold HDD
-Here is a **complete interview-style answer** to the question:
+* **EBS (Elastic Block Store):** Persistent block storage. Data survives instance stop/start. Can be detached/attached to multiple instances.
+* **Instance Store:** Ephemeral storage located on disks that are physically attached to the host. Data lost on stop/terminate.
 
 ---
 
+#### 4. What are the types of EBS volumes?
 
-**Q: What are the types of Amazon EBS volumes, and when would you use each?**
+**Answer:**
+Amazon EBS offers five volume types:
 
----
+1. **gp3 (General Purpose SSD):**
 
-### **Answer:**
+   * Baseline 3,000 IOPS and 125 MB/s throughput, scalable to 16,000 IOPS/1,000 MB/s
+   * Ideal for general-purpose workloads, boot volumes
 
-Amazon EBS (Elastic Block Store) provides **five types of volumes**, each designed for different use cases based on performance and cost requirements:
+2. **gp2 (General Purpose SSD - Legacy):**
 
----
+   * IOPS tied to volume size (3 IOPS/GB)
+   * Use for dev/test, smaller workloads
 
-#### 🔹 1. **gp3 – General Purpose SSD (Latest Generation)**
+3. **io1/io2 (Provisioned IOPS SSD):**
 
-* **Description:**
+   * io2 is more durable and provides 99.999% durability
+   * Up to 64,000 IOPS
+   * Ideal for large relational/NoSQL databases
 
-  * Default EBS volume type.
-  * Offers **baseline performance of 3,000 IOPS** and **125 MB/s throughput**, scalable up to **16,000 IOPS** and **1,000 MB/s**.
-  * IOPS and throughput are **independent** of volume size.
-* **Use Cases:**
+4. **st1 (Throughput Optimized HDD):**
 
-  * Boot volumes
-  * General-purpose workloads
-  * Web/application servers
-  * Small to medium databases
+   * Low cost, good for large, sequential workloads like big data
+   * Cannot be used as boot volume
 
----
+5. **sc1 (Cold HDD):**
 
-#### 🔹 2. **gp2 – General Purpose SSD (Legacy)**
-
-* **Description:**
-
-  * Older SSD volume type.
-  * **IOPS is tied to size** (3 IOPS per GB, up to 16,000 IOPS).
-  * Performance bursts for short periods.
-* **Use Cases:**
-
-  * Development/testing
-  * Boot volumes
-  * Low to moderate workload apps
+   * Lowest-cost, infrequent access workloads
+   * Suitable for archives and backups
 
 ---
 
-#### 🔹 3. **io1 / io2 – Provisioned IOPS SSD**
+#### 5. What are EC2 pricing models?
 
-* **Description:**
+**Answer:**
 
-  * Designed for **high-performance, I/O-intensive** workloads.
-  * Supports up to **64,000 IOPS (Nitro instances)**.
-  * **io2** is more durable and reliable than io1 (99.999% durability).
-* **Use Cases:**
+1. **On-Demand:**
 
-  * Large databases like Oracle, MySQL, PostgreSQL
-  * Critical transactional systems
-  * Applications requiring consistent low-latency I/O
-  * SAP HANA, NoSQL DBs like MongoDB
+   * Pay per second (or hour for Windows)
+   * No long-term commitment
+2. **Reserved Instances:**
 
----
+   * 1- or 3-year commitment
+   * Up to 75% cheaper
+3. **Spot Instances:**
 
-#### 🔹 4. **st1 – Throughput Optimized HDD**
+   * Up to 90% discount
+   * Can be terminated with 2-minute warning
+4. **Savings Plans:**
 
-* **Description:**
-
-  * Spinning disk HDD optimized for **large, sequential I/O**.
-  * Good throughput but **lower IOPS**.
-  * Cannot be a boot volume.
-* **Use Cases:**
-
-  * Big data processing (Hadoop, Spark)
-  * Data warehouses
-  * Log processing and streaming workloads
+   * Flexible pricing model, commit to compute usage (not instance type)
 
 ---
 
-#### 🔹 5. **sc1 – Cold HDD**
+### ⚙️ Intermediate EC2 Interview Questions
 
-* **Description:**
+#### 6. What is a security group in EC2?
 
-  * Lowest cost HDD storage.
-  * Designed for **infrequently accessed** data.
-  * Very low IOPS and throughput.
-* **Use Cases:**
+**Answer:**
+Security Groups act as virtual firewalls for EC2 instances.
 
-  * Backup and archival
-  * Disaster recovery
-  * Large volumes of rarely used data
+* Control inbound and outbound traffic
+* Stateful: Return traffic is automatically allowed
+* Default: All inbound traffic denied, outbound allowed
 
 ---
 
-### 📌 **Summary Table:**
+#### 7. Difference between a Security Group and Network ACL
 
-| Volume Type | Category | Max IOPS | Use Case                           |
-| ----------- | -------- | -------- | ---------------------------------- |
-| **gp3**     | SSD      | 16,000   | General workloads, better than gp2 |
-| **gp2**     | SSD      | 16,000   | Boot volumes, dev/test             |
-| **io1/io2** | SSD      | 64,000   | High-performance DBs               |
-| **st1**     | HDD      | \~500    | Big data, logs                     |
-| **sc1**     | HDD      | \~250    | Archival, backup                   |
-
----
-
-### 🔚 Final Tip for Interviews:
-
-Always relate EBS volume choice to **cost, performance, and durability needs**. For example, mention `io2` for high durability in production DBs and `gp3` for everyday scalable workloads.
-
----
-
-Would you like me to format this answer into a **1-page printable interview sheet or PDF**?
-
-
----
-
-### 5. **What are EC2 pricing models?**
-
-* **Ans:**
-
-  * **On-Demand:** Pay per hour/second
-  * **Reserved:** 1/3-year commitment, up to 75% discount
-  * **Spot Instances:** Up to 90% cheaper, can be interrupted
-  * **Savings Plans:** Flexible pricing model
-
----
-
-## ⚙️ **Intermediate EC2 Questions**
-
-### 6. **What is a security group in EC2?**
-
-* **Ans:** Virtual firewall attached to EC2 instances.
-
-  * **Inbound/outbound rules**
-  * **Stateful**
-  * **Default deny all**
-
----
-
-### 7. **What is the difference between a security group and a network ACL?**
-
-| Feature    | Security Group | NACL         |
+| Feature    | Security Group | Network ACL  |
 | ---------- | -------------- | ------------ |
-| Type       | Instance-level | Subnet-level |
-| Rules      | Allow only     | Allow/deny   |
+| Level      | Instance-level | Subnet-level |
+| Rules      | Allow only     | Allow/Deny   |
 | Stateful   | Yes            | No           |
-| Applied To | EC2            | Subnets      |
+| Applies To | EC2            | Subnets      |
 
 ---
 
-### 8. **What is a key pair in EC2?**
+#### 8. What is a Key Pair in EC2?
 
-* **Ans:** A public-private key used to SSH into Linux EC2 instances.
-* AWS stores the **public key**, user keeps **private key (.pem/.ppk)**.
-
----
-
-### 9. **What are EC2 instance states?**
-
-* Pending → Running → Stopping → Stopped → Terminated
+**Answer:**
+Key pairs enable secure SSH access to Linux instances. AWS stores the public key, and you download the private key (`.pem` or `.ppk`).
 
 ---
 
-### 10. **How do you connect to an EC2 Linux instance?**
+#### 9. EC2 Instance Lifecycle States
 
-* SSH using:
-
-  ```bash
-  ssh -i "your-key.pem" ec2-user@<public-ip>
-  ```
-
----
-
-### 11. **What is an Elastic IP?**
-
-* Static public IPv4 address assigned to an EC2.
-* Stays the same across stop/start.
+* Pending
+* Running
+* Stopping
+* Stopped
+* Terminated
 
 ---
 
-### 12. **How do you resize an EC2 instance?**
+#### 10. How do you connect to an EC2 Linux instance?
 
-* Stop the instance → Change instance type → Start again
+**Answer:**
+Using SSH:
 
----
+```bash
+ssh -i "your-key.pem" ec2-user@<public-ip>
+```
 
-### 13. **How can you protect data in EC2?**
-
-* **Use encrypted EBS volumes**
-* **Enable SSL/TLS for apps**
-* **Use IAM roles**
-* **Restrict access via security groups**
+Ensure port 22 is open in the security group.
 
 ---
 
-### 14. **How to automate EC2 provisioning?**
+#### 11. What is an Elastic IP?
 
-* Use **Launch Templates**, **Auto Scaling Groups**, **CloudFormation**, or **Terraform**.
-
----
-
-## 🚀 **Advanced EC2 Interview Questions**
-
-### 15. **What is the difference between a Launch Template and Launch Configuration?**
-
-| Feature            | Launch Template | Launch Configuration |
-| ------------------ | --------------- | -------------------- |
-| Versioning         | Yes             | No                   |
-| Newer AWS services | Supported       | Limited              |
-| Flexibility        | More flexible   | Less flexible        |
+**Answer:**
+A static IPv4 address designed for dynamic cloud computing. It persists even if you stop/start an instance.
 
 ---
 
-### 16. **What is EC2 Auto Scaling?**
+#### 12. How to resize an EC2 instance?
 
-* Automatically increases or decreases the number of EC2 instances based on:
-
-  * **CPU Utilization**
-  * **Custom CloudWatch metrics**
-  * **Schedules**
+1. Stop instance
+2. Modify instance type
+3. Start instance
 
 ---
 
-### 17. **What is an EC2 placement group?**
+#### 13. How to secure data on EC2?
 
-* Logical group of instances for workload placement.
-
-  * **Cluster:** Same AZ – low latency
-  * **Spread:** Different hardware – high availability
-  * **Partition:** Logical groups, used for Hadoop, etc.
-
----
-
-### 18. **How does Spot Instance interruption work?**
-
-* AWS can reclaim spot instances with **2-minute warning**.
-* Use **Spot Instance interruption notice** to gracefully shut down.
+* Use encrypted EBS volumes
+* Use SSL/TLS for secure data transmission
+* Use IAM roles instead of static credentials
+* Restrict access using Security Groups and NACLs
 
 ---
 
-### 19. **What is hibernation in EC2?**
+#### 14. How to automate EC2 provisioning?
 
-* Pauses an instance and saves RAM contents to EBS.
-* Fast boot-up, useful for dev environments.
-
----
-
-### 20. **What is EC2 user data?**
-
-* Script executed at instance launch.
-* Example: Installing Apache
-
-  ```bash
-  #!/bin/bash
-  yum update -y
-  yum install httpd -y
-  systemctl start httpd
-  ```
+* AWS CloudFormation
+* Terraform
+* Launch Templates and Auto Scaling Groups
+* AWS CLI/SDK
 
 ---
 
-### 21. **What’s the difference between stop and terminate?**
+### 🚀 Advanced EC2 Interview Questions
 
-* **Stop:** Instance can be restarted; EBS data retained.
-* **Terminate:** Instance is deleted; data lost unless EBS is kept.
+#### 15. Difference between Launch Template and Launch Configuration
 
----
-
-### 22. **Can we attach multiple EBS volumes to one EC2?**
-
-* Yes, EC2 can have **multiple EBS volumes** (up to 27 in most cases).
-
----
-
-### 23. **How do IAM roles work with EC2?**
-
-* Attach role to EC2 to allow access to other AWS services without storing credentials.
+| Feature         | Launch Template | Launch Configuration |
+| --------------- | --------------- | -------------------- |
+| Versioning      | Yes             | No                   |
+| Modern Features | Supported       | Limited              |
+| Flexibility     | More            | Less                 |
 
 ---
 
-### 24. **What is ENI (Elastic Network Interface)?**
+#### 16. What is EC2 Auto Scaling?
 
-* A **virtual network interface** that can be attached to EC2 instances.
-* Useful for:
+Automatically adjusts number of EC2 instances based on:
 
-  * Dual-homed instances
-  * Failover
-
----
-
-### 25. **How do you troubleshoot EC2 instance connectivity issues?**
-
-* Check:
-
-  * Security group
-  * NACLs
-  * Route tables
-  * Public IP
-  * Key pair
-  * OS-level firewall (iptables, ufw)
+* CPU usage
+* Schedules
+* CloudWatch custom metrics
 
 ---
 
-## 📘 **Bonus Scenario-Based Questions**
+#### 17. What is an EC2 Placement Group?
 
-### ✅ **Q: Your web server is not accessible over HTTP. How would you troubleshoot?**
+Logical group of instances:
 
-* Check:
-
-  * Security group has port 80 open
-  * Instance is running
-  * Web service is installed and started
-  * NACL and route table settings
-  * Internet Gateway attached (if public subnet)
+* **Cluster:** Same AZ, low latency/high throughput
+* **Spread:** Different racks, fault-tolerant
+* **Partition:** Logical divisions, ideal for large-scale workloads like Hadoop
 
 ---
 
-### ✅ **Q: How do you recover data from a terminated instance?**
+#### 18. Spot Instance Interruption Handling
 
-* Only possible if:
-
-  * EBS volume is not deleted on termination
-  * Then: Attach volume to another EC2
+* AWS provides 2-minute warning before reclaiming
+* Use interruption notice script to shutdown gracefully
 
 ---
 
-### ✅ **Q: How to make EC2 highly available?**
+#### 19. What is EC2 Hibernation?
 
-* Use:
-
-  * **Auto Scaling Groups**
-  * **Elastic Load Balancer (ELB)**
-  * **Instances in multiple AZs**
+Preserves instance RAM to EBS when stopped. On restart, instance boots faster with same state.
+Useful for dev, training, analytics environments.
 
 ---
 
-## 📚 Official Documentation & Further Learning
+#### 20. What is EC2 User Data?
 
-* 🔗 EC2 Overview: [https://docs.aws.amazon.com/ec2/index.html](https://docs.aws.amazon.com/ec2/index.html)
-* 🔗 EC2 Pricing: [https://aws.amazon.com/ec2/pricing/](https://aws.amazon.com/ec2/pricing/)
-* 🔗 Launch Templates: [https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html)
-* 🔗 EC2 Auto Scaling: [https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html](https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html)
+User data is a script that runs at launch.
+Example:
+
+```bash
+#!/bin/bash
+yum update -y
+yum install httpd -y
+systemctl start httpd
+```
 
 ---
 
-Would you like these compiled into a **PDF**, or should I continue with **scenario-based or real-time troubleshooting questions** for EC2?
+#### 21. Difference Between Stop and Terminate
+
+| Operation | Instance | EBS Volume |
+| --------- | -------- | ---------- |
+| Stop      | Retained | Retained   |
+| Terminate | Deleted  | Optional   |
+
+---
+
+#### 22. Can EC2 Have Multiple EBS Volumes?
+
+Yes, up to 27 EBS volumes can be attached per instance (depends on instance type).
+
+---
+
+#### 23. How IAM Roles Work With EC2?
+
+* Attach IAM roles to EC2 to access other AWS services securely.
+* No need to hardcode credentials.
+
+---
+
+#### 24. What is an ENI (Elastic Network Interface)?
+
+A virtual network interface attached to EC2.
+
+* Used for failover, multi-homed networking, or application segregation
+
+---
+
+#### 25. How to Troubleshoot EC2 Connectivity?
+
+1. Check security group rules
+2. Ensure subnet has route to IGW (if public)
+3. Verify NACL allows traffic
+4. Instance has a public IP
+5. OS-level firewall (iptables/ufw) not blocking
+
+---
+
+### 📘 Bonus Scenario-Based Questions
+
+**Scenario:** Your EC2 web server is not accessible via HTTP.
+**Troubleshooting Steps:**
+
+* Security Group allows port 80
+* Instance is in Running state
+* Web service is installed and active (e.g., Apache, Nginx)
+* NACL and route tables correctly configured
+* Instance in a public subnet with IGW
+
+**Scenario:** Recover data from a terminated instance?
+
+* Only possible if EBS volume was not deleted
+* Attach volume to another EC2 instance
+
+**Scenario:** How to ensure high availability in EC2?
+
+* Use Auto Scaling Groups
+* Deploy across multiple Availability Zones
+* Use Elastic Load Balancer (ELB)
+
+### 📚 Official Documentation & Links
+
+* EC2 Overview: [https://docs.aws.amazon.com/ec2/index.html](https://docs.aws.amazon.com/ec2/index.html)
+* EC2 Pricing: [https://aws.amazon.com/ec2/pricing/](https://aws.amazon.com/ec2/pricing/)
+* Launch Templates: [https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html)
+* EC2 Auto Scaling: [https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html](https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html)
