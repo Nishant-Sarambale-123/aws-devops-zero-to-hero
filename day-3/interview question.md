@@ -11,17 +11,21 @@ Here is a comprehensive list of **important AWS EC2 interview questions**, categ
 
 ---
 
-### 2. **What are the different types of EC2 instances?**
+1. What are the different EC2 instance families, and how do you choose between them?
+Answer:
+AWS EC2 instance families are categorized based on the type of workload:
 
-* **Ans:**
+General Purpose (T4g, T3, M6g, M5): Balanced CPU, memory, and network. Good for web servers, small databases.
 
-  * **General Purpose:** T4g, T3, T3a, M6g, M5
-  * **Compute Optimized:** C7g, C6g, C5
-  * **Memory Optimized:** R6g, R5, X2idn
-  * **Storage Optimized:** I4i, D3, H1
-  * **Accelerated Computing:** P4, Inf2, G5
+Compute Optimized (C7g, C6g, C5): High CPU-to-memory ratio. Ideal for CPU-bound workloads like batch processing or gaming servers.
 
----
+Memory Optimized (R6g, R5, X2idn): High memory-to-CPU ratio. Best for in-memory databases like Redis or SAP HANA.
+
+Storage Optimized (I4i, D3, H1): Designed for high disk I/O. Useful for big data and NoSQL.
+
+Accelerated Computing (P4, G5, Inf2): Use GPUs or custom chips for ML/AI, inference, rendering.
+
+Follow-up Tip: Always evaluate performance requirements, cost efficiency, and instance architecture (Intel/Graviton) when choosing.
 
 ### 3. **What is the difference between an EBS volume and an instance store?**
 
