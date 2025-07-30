@@ -94,3 +94,155 @@ Here are **detailed notes** on the given AWS basics points to help you with your
 ---
 
 Let me know if you'd like notes on more AWS concepts like EC2, S3, IAM, VPC, Lambda, etc.
+
+Great! Below are **interview questions** on **AWS, Region, Availability Zone, and Edge Location** — along with **model answers**, including **scenario-based questions** to help you prepare thoroughly.
+
+---
+
+## ✅ **BASIC INTERVIEW QUESTIONS & ANSWERS**
+
+---
+
+### **1. What is AWS and what services does it offer?**
+
+🟢 **Answer:**
+AWS (Amazon Web Services) is a cloud platform offering over 200 services such as compute (EC2, Lambda), storage (S3, EBS), databases (RDS, DynamoDB), networking (VPC, CloudFront), and more. These services allow companies to build scalable, secure, and flexible infrastructure in the cloud.
+
+---
+
+### **2. What is the difference between a Region and an Availability Zone (AZ)?**
+
+🟢 **Answer:**
+
+* A **Region** is a geographical area (like Mumbai, Frankfurt, etc.) containing multiple data centers.
+* An **Availability Zone** is one or more isolated data centers within a Region. Each AZ has independent power and networking but is interconnected with low-latency links to other AZs in the same region.
+
+---
+
+### **3. Why does AWS offer multiple Availability Zones within a Region?**
+
+🟢 **Answer:**
+To improve fault tolerance and high availability. If one AZ fails due to a disaster or outage, the application can continue running from another AZ.
+
+---
+
+### **4. What are Edge Locations and how are they used?**
+
+🟢 **Answer:**
+Edge Locations are content delivery endpoints used by services like CloudFront (CDN). They cache copies of content closer to end-users to reduce latency and improve performance.
+
+---
+
+### **5. What is the purpose of deploying applications across multiple AZs?**
+
+🟢 **Answer:**
+To ensure **high availability** and **disaster recovery**. If one AZ goes down, the application can still serve users from the other AZs.
+
+---
+
+### **6. Can you access AWS resources across Regions?**
+
+🟢 **Answer:**
+Generally no, AWS resources are **Region-scoped** (like EC2, RDS). You can copy some resources (like AMIs or snapshots) across Regions manually, but they don’t replicate automatically across regions.
+
+---
+
+### **7. How does CloudFront use Edge Locations?**
+
+🟢 **Answer:**
+CloudFront caches content like images, videos, and webpages in Edge Locations, serving them to users from the nearest point. This minimizes latency and load on the origin server.
+
+---
+
+### **8. What factors should you consider when choosing an AWS Region?**
+
+🟢 **Answer:**
+
+* Proximity to end-users (for lower latency)
+* Compliance and data residency requirements
+* Available services in the Region
+* Pricing (costs vary by region)
+* Disaster recovery setup needs
+
+---
+
+### **9. Can you move an EC2 instance to another Region?**
+
+🟢 **Answer:**
+Not directly. You need to:
+
+1. Create an Amazon Machine Image (AMI) of the instance.
+2. Copy the AMI to the target region.
+3. Launch a new EC2 instance in the new region from that AMI.
+
+---
+
+### **10. What happens if an Availability Zone goes down?**
+
+🟢 **Answer:**
+All resources in that AZ (EC2, RDS, etc.) become temporarily inaccessible. If your architecture is built across multiple AZs, your application can failover to another AZ, maintaining availability.
+
+---
+
+## ✅ **SCENARIO-BASED QUESTIONS & ANSWERS**
+
+---
+
+### **1. Scenario: Region & High Availability**
+
+🔸 **Question:**
+Your company is hosting a web application in the Mumbai Region (`ap-south-1`). The application must be highly available and should continue to run even if one Availability Zone fails. How would you design this?
+
+🟢 **Answer:**
+I would deploy the application in **at least two Availability Zones** within the Mumbai region using a **load balancer** (like ALB). EC2 instances or containers would be deployed across both AZs. The database (like RDS) would be configured for **Multi-AZ deployment**, which provides automatic failover. This ensures high availability and fault tolerance.
+
+---
+
+### **2. Scenario: Low Latency for Global Users**
+
+🔸 **Question:**
+You have a static website hosted in S3 in the US East region, but users in India experience slow loading times. What AWS service would you use to improve performance?
+
+🟢 **Answer:**
+I would use **Amazon CloudFront**, a Content Delivery Network (CDN) service. It caches the website content in **Edge Locations** around the world, including India. This allows users to get data from the nearest location, reducing latency and improving performance.
+
+---
+
+### **3. Scenario: Data Residency Regulations**
+
+🔸 **Question:**
+A client requires all their data to stay within India due to legal and compliance rules. How do you ensure this using AWS?
+
+🟢 **Answer:**
+I would deploy all AWS services (EC2, RDS, S3, etc.) in the **Mumbai Region (`ap-south-1`)** and ensure no cross-region replication or backups occur. IAM policies and service configurations would be reviewed to restrict data movement outside India.
+
+---
+
+### **4. Scenario: Edge Location Understanding**
+
+🔸 **Question:**
+Your manager asks why AWS charges for requests to CloudFront edge locations. How would you explain the purpose of edge locations?
+
+🟢 **Answer:**
+Edge Locations are **caching points** that serve content to users from the nearest location, reducing latency and improving performance. AWS charges for these requests because they offload traffic from the main servers and accelerate delivery. They also incur costs for infrastructure and data transfer.
+
+---
+
+### **5. Scenario: Disaster Recovery**
+
+🔸 **Question:**
+You’re asked to design a disaster recovery (DR) plan across regions. How do you replicate your workload from the Mumbai region to Singapore?
+
+🟢 **Answer:**
+
+* For EC2: Use **AMI copy** to replicate instances.
+* For S3: Enable **Cross-Region Replication**.
+* For RDS: Use **read replica in another region**.
+* Set up infrastructure in Singapore with automation (e.g., CloudFormation or Terraform).
+* Store backups in both regions.
+* Use Route 53 for **DNS failover** to redirect traffic in case Mumbai goes down.
+
+---
+
+Let me know if you'd like more **advanced**, **DevOps**, or **SRE-level AWS questions** based on these topics.
+
