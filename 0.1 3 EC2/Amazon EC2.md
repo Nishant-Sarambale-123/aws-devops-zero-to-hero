@@ -64,6 +64,33 @@ Here’s a **detailed set of notes on Amazon EC2 (Elastic Compute Cloud)**, orga
   * **Spread** – instances spread across hardware.
   * **Partition** – distributed across logical partitions (big data, Hadoop).
 
+  1. Cluster Placement Group
+
+Meaning: All instances are kept close together on the same hardware.
+
+Use: When you need fast communication between servers.
+
+Example:
+For high-performance computing (HPC) or real-time gaming, where speed between instances matters.
+
+2. Spread Placement Group
+
+Meaning: Each instance is kept on different hardware.
+
+Use: To reduce risk — if one machine fails, others keep running.
+
+Example:
+For critical systems where all servers should not fail together.
+
+3. Partition Placement Group
+
+Meaning: Instances are divided into separate groups (partitions), each on different racks.
+
+Use: For large data systems like Hadoop or Cassandra, where you want separation but many servers.
+
+Example:
+Big data clusters where you want fault isolation between partitions.
+
 ---
 
 ## 4. **Lifecycle of an EC2 Instance**
