@@ -3,6 +3,9 @@
 #### 1. What is Amazon EC2?
 
 **Answer:**
+
+Amazon EC2 is a cloud service that provides virtual servers to run your applications easily and scale them as needed.
+
 Amazon EC2 (Elastic Compute Cloud) is a web service provided by AWS that offers scalable and resizable compute capacity in the cloud. It eliminates the need to invest in hardware upfront, so you can develop and deploy applications faster.
 
 **Key Points:**
