@@ -20,3 +20,12 @@ Can run on Amazon RDS or Aurora for managed setup.
 Interview Tip: “PostgreSQL is a reliable, structured database that works well for applications needing complex queries and transactions.
 
 
+
+
+
+
+Cassandra
+
+Cassandra is a NoSQL database made for very large and fast applications. It stores data in a flexible format and works across many servers without stopping. It is used for apps like IoT, real-time data, or time-series data. On AWS, Keyspaces manages it automatically with scaling and backups.
+
+
