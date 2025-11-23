@@ -37,6 +37,12 @@ SQS is a **fully managed message queueing service** that decouples application c
 
 ### **a) Standard Queue**
 
+
+A Standard Queue is the default SQS queue that gives very high throughput.
+It delivers messages at least once, but the order is not guaranteed.
+It is used for high-volume workloads where speed is more important than ordering.
+
+
 * **Unlimited throughput**
 * **At-least-once** delivery
 * **Best-effort ordering** (not strict)
