@@ -118,6 +118,11 @@ Send/Delete messages in batches (up to 10 msgs).
 
 ## **1. What is SNS?**
 
+SNS (Simple Notification Service) is a service that sends one message to many receivers at the same time.
+It is used for notifications, alerts, and broadcasting events to multiple systems.
+
+
+
 SNS is a **pub/sub messaging service** used for broadcasting messages to many subscribers simultaneously.
 
 ### **Why it is used**
