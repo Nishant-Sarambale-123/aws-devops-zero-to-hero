@@ -1,6 +1,18 @@
 Here you go — **full detailed SQS & SNS notes + interview questions & answers** in a clean, exam-ready format.
 
 ---
+What is SQS?
+
+SQS is a message queue.
+Think of it like a line (queue) where messages wait until someone picks them up.
+
+Producer → sends message
+
+Queue → stores message
+
+Consumer → reads and processes message
+
+
 
 # ✅ **Amazon SQS & SNS – Detailed Notes + Interview Q&A**
 
