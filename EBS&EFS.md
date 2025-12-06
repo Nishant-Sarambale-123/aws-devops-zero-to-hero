@@ -307,3 +307,117 @@ If you want, I can also prepare:
 ✅ EFS mount commands + examples
 ✅ More scenario-based interview questions
 Just tell me!
+
+
+
+Here are **EFS (Elastic File System) modes** explained in the simplest and clearest way:
+
+---
+
+# ✅ **EFS Modes**
+
+EFS has **two main types of modes**:
+
+---
+
+# 🟦 **1. Performance Modes**
+
+Controls **latency + throughput type**.
+
+### ⭐ **(A) General Purpose (Default)**
+
+* Low latency
+* Best for web apps, CMS, Dev/Test
+* Most commonly used
+
+### ⭐ **(B) Max I/O**
+
+* High throughput, high concurrency
+* Higher latency
+* Best for big data, analytics, media processing
+
+**Think:**
+General Purpose = fast response
+Max I/O = huge load handling
+
+---
+
+# 🟩 **2. Throughput Modes**
+
+Controls **how much data the file system can push per second**.
+
+### ⭐ **(A) Bursting Throughput (Default)**
+
+* Throughput grows with storage size
+* Ideal for normal workloads
+* No extra cost
+
+### ⭐ **(B) Provisioned Throughput**
+
+* You set the throughput manually (MiB/s)
+* Costs extra
+* Used when you need high throughput even if storage is small
+
+### ⭐ **(C) Elastic Throughput (Newer)**
+
+* Automatically adjusts throughput
+* No need to manage anything
+* Best for unpredictable workloads
+
+---
+
+# 🟧 **3. Storage Classes**
+
+Controls **pricing & access frequency**.
+
+### ⭐ **(A) Standard (Default)**
+
+* For daily use
+* High performance
+
+### ⭐ **(B) IA — Infrequent Access**
+
+* Cheaper storage
+* You pay per access
+* Good for backups, cold data
+
+**You can enable Lifecycle Policy to move files automatically to IA.**
+
+---
+
+# 🟪 **4. Mount Target Availability Zones**
+
+This isn't exactly a "mode", but important:
+
+* EFS requires **Mount Targets in each AZ**
+* EC2/EKS must access via same VPC
+
+---
+
+# 🎯 Quick Summary Table
+
+| Category          | Mode            | Best Use Case                  |
+| ----------------- | --------------- | ------------------------------ |
+| **Performance**   | General Purpose | Most apps, low latency         |
+|                   | Max I/O         | Large scale parallel workloads |
+| **Throughput**    | Bursting        | Default workloads              |
+|                   | Provisioned     | Consistent high throughput     |
+|                   | Elastic         | Unpredictable workloads        |
+| **Storage Class** | Standard        | Hot data                       |
+|                   | IA              | Cold data, backups             |
+
+---
+
+# 🧠 **Interview One-Liner**
+
+**EFS provides Performance Modes (General Purpose, Max I/O) and Throughput Modes (Bursting, Provisioned, Elastic), plus Storage Classes (Standard, IA).**
+
+---
+
+If you want, I can explain:
+✔ EFS vs EBS vs S3
+✔ EFS cost optimization
+✔ EFS in EKS
+✔ Sample architecture diagrams
+
+Just ask!
