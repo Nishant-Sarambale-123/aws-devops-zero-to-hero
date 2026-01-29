@@ -164,6 +164,13 @@ Query by email instead of UserID.
 
 Two modes:
 
+Now the simple breakdown:
+
+👉 RCU (Read Capacity Unit):
+How many reads per second your table supports.
+
+👉 WCU (Write Capacity Unit):
+How many writes per second your table supports.
 ---
 
 ### 🔹 Provisioned Mode
