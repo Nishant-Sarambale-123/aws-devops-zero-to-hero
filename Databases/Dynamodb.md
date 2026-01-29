@@ -70,6 +70,20 @@ Example:
 | ----------- | ------- | --- |
 | 101         | Nishant | 25  |
 
+
+Sure — simplest possible definitions 👇
+
+👉 Item:
+A complete record in a DynamoDB table (like one row in a database).
+
+👉 Attribute:
+A single field inside an item (like one column value).
+
+Even simpler:
+
+Item = full row
+Attribute = one piece of data in that row
+
 ---
 
 ## 4. Primary Keys
