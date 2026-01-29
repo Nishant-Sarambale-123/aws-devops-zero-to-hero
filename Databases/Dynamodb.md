@@ -208,17 +208,21 @@ Auto scaling built-in.
 
 DynamoDB Read & Write Capacity Types
 📖 Read Capacity (RCU types)
-Read Type	RCU cost	Meaning	Use case
-Eventually consistent read	0.5 RCU	May return slightly old data	Default apps
-Strongly consistent read	1 RCU	Always latest data	Critical reads
-Transactional read	2 RCU	ACID guaranteed read	Payments/orders
+| Read Type                  | RCU cost    | Meaning                      | Use case        |
+| -------------------------- | ----------- | ---------------------------- | --------------- |
+| Eventually consistent read | **0.5 RCU** | May return slightly old data | Default apps    |
+| Strongly consistent read   | **1 RCU**   | Always latest data           | Critical reads  |
+| Transactional read         | **2 RCU**   | ACID guaranteed read         | Payments/orders |
+
 
 👉 All values are for up to 4 KB item size
 
 ✍️ Write Capacity (WCU types)
 Write Type	WCU cost	Meaning	Use case
-Standard write	1 WCU	Normal write/update	Most apps
-Transactional write	2 WCU	ACID guaranteed write	Banking/orders
+| Write Type          | WCU cost  | Meaning               | Use case       |
+| ------------------- | --------- | --------------------- | -------------- |
+| Standard write      | **1 WCU** | Normal write/update   | Most apps      |
+| Transactional write | **2 WCU** | ACID guaranteed write | Banking/orders |
 
 👉 All values are for up to 1 KB item size
 
